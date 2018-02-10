@@ -31,9 +31,8 @@ class JdCrawlSpider(CrawlSpider):
             pid = re.search('\d+', response.url).group()
             title = ''.join(response.css('.sku-name::text,#name h1::text').extract()).strip()
         except:
-            # logger.info('failed to get product\'s id %d', response.url)
             pid = ''
-            print('failed to get product\'s id')
+            # logger.info('failed to get product\'s id %d', response.url)
         if pid:
             yield scrapy.Request(self.comment_url.format(pid=pid, page=0),
                                  meta={'pid': pid, 'page': 0, 'title':title},
