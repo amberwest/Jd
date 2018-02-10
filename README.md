@@ -45,4 +45,5 @@ redis-cli -a password
 127.0.0.1:6379> select 1
 OK
 127.0.0.1:6379[1]> lpush jd_comment:start_urls http://jd.com
-(integer) 1```
+(integer) 1
+```
