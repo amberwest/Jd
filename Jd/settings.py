@@ -7,20 +7,25 @@ BOT_NAME = 'Jd'
 SPIDER_MODULES = ['Jd.spiders']
 NEWSPIDER_MODULE = 'Jd.spiders'
 
-# # 启用Redis调度存储请求队列
-# SCHEDULER = 'scrapy_redis.scheduler.Scheduler'
-#
-# # 确保所有的爬虫通过redis去重
-# DUPEFILITER_CLASS = "scrapy_redis.dupefliter.RFPDupeFilter"
-#
-# # 不清除redis队列，这样可以暂停/恢复 爬取
-# SCHEDULER_PERSIST = True
-#
-# # redis连接string
-# REDIS_URI = 'redis://root:babyfunlab@localhost:6379'
+# 确保所有的爬虫通过redis去重
+DUPEFILTER_CLASS = "scrapy_redis.dupefilter.RFPDupeFilter"
+# 启用Redis调度存储请求队列
+SCHEDULER = "scrapy_redis.scheduler.Scheduler"
+SCHEDULER_ORDER = 'BFO'
+# 不清除redis队列，这样可以暂停/恢复 爬取
+SCHEDULER_PERSIST = True
+SCHEDULER_QUEUE_CLASS = 'scrapy_redis.queue.SpiderPriorityQueue'
+
+REDIS_URL = None
+REDIS_HOST = '127.0.0.1'
+REDIS_PORT = 6379
+REDIS_PARAMS = {
+    'password': '',
+    'db': 1
+}
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'Jd (+http://www.yourdomain.com)'
+# USER_AGENT = 'Jd (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = False
@@ -83,10 +88,10 @@ DOWNLOAD_DELAY = 0.2
 
 # 将清除的项目在redis进行处理
 ITEM_PIPELINES = {
-    # 'scrapy_reids.pipelines.RedisPipeline': 300,
+    'scrapy_redis.pipelines.RedisPipeline': 300,
    # 'Jd.pipelines.JdMysqlPipeline': 400,
     # 异步插入mysql
-    'Jd.pipelines.MysqlTwistedPipeline': 400,
+    # 'Jd.pipelines.MysqlTwistedPipeline': 400,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
