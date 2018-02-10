@@ -36,8 +36,9 @@ REDIS_PARAMS = {
 ##### 启动redis
 * 登录redis
 ```
-redis-server
-redis-cli -a password
+redis-server redis.conf
+redis-cli
+127.0.0.1:6379> auth password
 ```
 * 选择对应数据库并输入start_url
 
