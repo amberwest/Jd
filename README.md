@@ -3,7 +3,7 @@
 使用scrapy_redis爬取京东评论
 
 ##### spider.py
-* 继承RedisSpider(如果要使用CrawlSpider需要多继承)
+* 一般的spider继承RedisSpider，全站爬取就继承RedisCrawlSpider
 * 设置redis_key
 * 不用写start_urls
 

@@ -7,14 +7,14 @@ import datetime
 import logging
 import scrapy
 from scrapy.linkextractors import LinkExtractor
-from scrapy.spiders import CrawlSpider, Rule
-from scrapy_redis.spiders import RedisSpider
+from scrapy.spiders import Rule
+from scrapy_redis.spiders import RedisCrawlSpider
 from Jd.items import CommentItem, SummaryItem
 
 # logger = logging.getLogger(__file__)
 
 
-class JdCrawlSpider(RedisSpider, CrawlSpider):
+class JdCrawlSpider(RedisCrawlSpider):
     name = 'jd_comment'
     crawl_date = datetime.datetime.now().strftime('%Y-%m-%d')
     allowed_domains = ['jd.com']
