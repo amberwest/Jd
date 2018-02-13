@@ -2,8 +2,6 @@
 import json
 import re
 
-import datetime
-
 import logging
 import scrapy
 from scrapy.linkextractors import LinkExtractor
@@ -16,10 +14,7 @@ from Jd.items import CommentItem, SummaryItem
 
 class JdCrawlSpider(RedisCrawlSpider):
     name = 'jd_comment'
-    crawl_date = datetime.datetime.now().strftime('%Y-%m-%d')
-    allowed_domains = ['jd.com']
     redis_key = 'jd_comment:start_urls'
-    # start_urls = ['http://jd.com/']
     comment_url = 'https://sclub.jd.com/comment/productPageComments.action?productId={pid}&score=0&sortType=5&page={page}&pageSize=10&isShadowSku=0&rid=0&fold=1'
 
     rules = (
